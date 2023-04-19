@@ -1,0 +1,122 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  width: 300px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 10px;
+  /* background-color:linear-gradient(to right top, #68ee9c, #00d6b7, #00bbc7, #009ec6, #007fb4, #2273b0, #3767a9, #495a9f, #5a5bac, #6e5bb6, #8558be, #9d54c4);; */
+  /* background-color: #ffff00; */
+  background-color: #b3f2dd;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  filter: blur(0.8px);
+  transition: all 0.3s ease-in-out;
+  color: #333; /* set default text color */
+}
+
+.card:hover {
+  outline: 2px solid #2c6e49;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+  filter: blur(0);
+  background: linear-gradient(
+    to bottom right,
+    #ffffff,
+    #192f6a
+  ); /* set background gradient */
+  color: #fff; /* set text color on hover */
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  bottom: -10px;
+  right: -10px;
+  z-index: -1;
+  /* background: linear-gradient(to bottom right, #ffffff, #b0d4b0); */
+  background: linear-gradient(
+    to right top,
+    #68ee9c,
+    #00d6b7,
+    #00bbc7,
+    #009ec6,
+    #007fb4,
+    #2273b0,
+    #3767a9,
+    #495a9f,
+    #5a5bac,
+    #6e5bb6,
+    #8558be,
+    #9d54c4
+  );
+
+  opacity: 0.5;
+  border-radius: 10px;
+}
+
+.imge {
+  height: 200px;
+  border-radius: 34px;
+  width: 100%;
+  clip-path: circle(95px at center);
+  object-fit: none;
+  /* border-radius: 99px; */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.details {
+  padding: 20px;
+  flex-grow: 1;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.adduserbutton {
+  background-color: #0750a3c2;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.searchbar input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  font-size: 16px;
+}
+
+.searchbar button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-left: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.row {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 80%;
+  }
+}

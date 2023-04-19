@@ -1,0 +1,15 @@
+.tabcontainer {
+  margin-top: -6px;
+  margin-left: -32px;
+}
+
+.back-button {
+  margin-left: 26px;
+  margin-top: 10px;
+  color: #fff;
+  background-color: #0d55da;
+  border: none;
+  padding: 0 20px;
+  width: 329px;
+  height: 70px;
+}

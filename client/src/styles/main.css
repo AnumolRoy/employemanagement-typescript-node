@@ -1,0 +1,30 @@
+.navbar {
+  /* background: linear-gradient(to right top, #8aa7ec, #8aa7ec, #8aa7ec, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); */
+  /* background-color: rgb(51, 40, 207); */
+  background-color: #49416d;
+  width: 634px;
+  height: 80px;
+  margin-top: -7px;
+  display: flex;
+  width: 1394px;
+  margin-left: -7px;
+}
+.nav-text {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-top: 26px;
+  font-size: 20px;
+  margin-left: 15px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
+}
+input:hover {
+  border: 2px solid black;
+  font-weight: bold;
+}

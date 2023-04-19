@@ -1,0 +1,135 @@
+.wrapper {
+  background: linear-gradient(
+    to right top,
+    #d16ba5,
+    #c777b9,
+    #ba83ca,
+    #aa8fd8,
+    #9a9ae1,
+    #8aa7ec,
+    #79b3f4,
+    #69bff8,
+    #52cffe,
+    #41dfff,
+    #46eefa,
+    #5ffbf1
+  );
+  /* border-radius: 25px; */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.input_field {
+  background-color: white;
+}
+
+.registration_form {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+}
+
+.form_wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_wrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.input_wrap label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"] {
+  /* background: none; */
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  width: 90%;
+  color: #000000;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  outline: none;
+  box-shadow: 0 0 20px rgba(10, 139, 190, 0.808);
+  font-style: italic;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+  box-shadow: 0 0 20px rgba(45, 6, 216, 0.4);
+}
+
+.error {
+  background-color: rgba(247, 240, 240, 0.911);
+  color: #fa0202;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin: auto;
+}
+
+.radio_wrap {
+  /* display: flex; */
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.radio_wrap input[type="radio"] {
+  margin-right: 10px;
+}
+
+.radio_wrap span {
+  font-weight: bold;
+  color: #000000;
+  font-size: 16px;
+}
+
+.submit_btn {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  font-size: 16px;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.submit_btn:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.submit_btn.save {
+  background-color: #52c41a;
+  color: #fff;
+}
+
+.submit_btn.cancel {
+  background-color: #ff4d4f;
+  color: #fff;
+}
