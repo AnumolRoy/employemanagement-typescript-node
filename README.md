@@ -6,14 +6,16 @@ homepage
 
 ![Screenshot (16)](https://user-images.githubusercontent.com/108685775/233064153-cb3138b4-1895-4cfa-a95b-f08b8d65db66.png)
 
-view profile
+search
 ![Screenshot (29)](https://user-images.githubusercontent.com/108685775/233073998-04025c44-6960-41ef-9236-a82902a3c079.png)
 
+Adduser
 ![Screenshot (26)](https://user-images.githubusercontent.com/108685775/233064206-41bcf1f2-4c72-46ab-b43f-b1ac0becfb92.png)
 
+validation
 ![Screenshot (27)](https://user-images.githubusercontent.com/108685775/233064228-39edfaf2-5675-484b-a935-a82e73e4cef3.png)
 
-adduser
+view profile
 ![Screenshot (36)](https://user-images.githubusercontent.com/108685775/233262293-f0ce8564-657c-4e85-9947-08439b428543.png)
 
 editpage
