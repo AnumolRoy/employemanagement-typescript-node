@@ -1,6 +1,7 @@
 .padding {
   padding: 3rem !important;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+ 
   width: 100%;
   background-color: #d7e2dbbe;
   /* background-image: linear-gradient(to right top, #00f000, #b6c600, #f49000, #ff5029, #ff006d, #fa007a, #f30087, #eb0094, #e90070, #e1004d, #d3002c, #c00404); */
@@ -24,7 +25,7 @@
   padding-left: 31px;
   width: 401px;
   margin-left: 457px;
-  margin-top: -7px;
+  margin-top: 23px;
   background: linear-gradient(
     to right top,
     #68ee9c,
@@ -98,9 +99,9 @@ html body .m-t-10 {
 }
 
 .gobackbutton {
-  background-color: #f2f2f2;
+  background-color: #df1010;
   border: 2px solid #ccc;
-  color: #333;
+  color: #ffffff;
 }
 
 .deletebutton {
@@ -115,9 +116,36 @@ html body .m-t-10 {
   color: #fff;
 }
 
-.gobackbutton:hover,
 .deletebutton:hover,
 .editbutton:hover {
   background-color: #ddd;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.savebuttonedit {
+  background-color: #208d04;
+  border: 1px solid #ffffff;
+  color: #fff;
+  padding: 10px 35px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.savebuttonedit:hover {
+  background-color: #2ac42a;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.gobackbutton:hover {
+  background-color: #c44e2a;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.genderForm{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

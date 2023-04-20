@@ -1,112 +1,129 @@
 /* Set the background color of the page */
 body {
-    background-color: #f5f5f5;
-  }
-  
-  /* Add padding to the page content */
-  .docList {
-    padding: 20px;
-  }
-  
-  /* Style for the file list */
+  background-color: #f5f5f5;
+}
+
+/* Add padding to the page content */
+.docList {
+  padding: 20px;
+}
+
+/* Style for the file list */
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  li:last-child {
-    border-bottom: none;
-  }
-  
-  span {
-    font-weight: bold;
-    font-size: 16px;
-  }
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #3e8e41;
-  }
-  
-  /* Style for the document list */
-  ul:last-of-type {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  li:last-child {
-    border-bottom: none;
-  }
-  
-  a {
-    /* display: block; */
-    padding: 10px;
-    color: #333;
-    text-decoration: none;
-    transition: background-color 0.2s;
-  }
-  
-  a:hover {
-    background-color: #f5f5f5;
-  }
-  
-  input[type="file"] {
-    display: none;
-  }
-  
-  .uploadButton {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    width: 100px;
-    padding: 8px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .uploadButton:hover {
-    background-color: #3e8e41;
-  }
-  
-  /* Style the document list */
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  li {
-    margin: 10px 0;
-  }
-  
-  a {
-    color: #4CAF50;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
- 
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+span {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+/* Style for the document list */
+ul:last-of-type {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+a {
+  /* display: block; */
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+a:hover {
+  background-color: #f5f5f5;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.uploadButton {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  width: 100px;
+  padding: 8px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.uploadButton:hover {
+  background-color: #3e8e41;
+}
+
+/* Style the document list */
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+}
+
+a {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#searchUpload {
+  width: 26%;
+  margin-left: 20px;
+}
+
+.uploadFolder {
+  width: 35%;
+  margin-left: 420px;
+}
+
+#image{
+  height: 100px;
+}
+
+#document{
+  width: 5%;
+}

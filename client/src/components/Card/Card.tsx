@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({ users }) => {
   const [userList, setUserList] = useState<User[]>([]);
   const [test, setTest] = useState<boolean>(true);
   const [showCard, setShowCard] = useState<boolean>(true);
-  const [oldUsers, setOldUsers] = useState<boolean>(true);
+    const [oldUsers, setOldUsers] = useState<boolean>(true);
   const [notFound, setNotFound] = useState<boolean>(false);
 
   useEffect(() => {

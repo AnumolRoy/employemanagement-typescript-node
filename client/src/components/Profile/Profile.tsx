@@ -70,10 +70,22 @@ const Profile: React.FC<IProfileProps> = () => {
   };
 
   const handleSave = async () => {
+    console.log(editedUser, "edited userrrrrrrrrrrrrr");
+    const updateData = {
+      name: editedUser.Name,
+      email: editedUser.email,
+      gender: editedUser.gender,
+      designation: editedUser.designation,
+    };
+    console.log(updateData, "update dataaaaaaaaaaaa");
+    console.log(profileId, "++++++++++++++++");
+
     try {
       const url = `http://localhost:3005/get/updateuser/${profileId}`;
 
-      await axios.put(url, editedUser).then((response) => {
+      await axios.put(url, updateData).then((response) => {
+        console.log(response, "responseeeeeeeeeeeeeeeeeeeeeee");
+
         setUser(editedUser);
       });
     } catch (error) {}
@@ -99,108 +111,148 @@ const Profile: React.FC<IProfileProps> = () => {
 
   return (
     <>
-      <Tab />
-      <div className="padding">
+      <Tab Id={profileId} Name={user.Name} />
+
+      <div className="padding " >
         <div className="col-md-8">
           <div className="cards card-no-border">
-            <img
-              className="card-img-top"
-              src="https://i.imgur.com/K7A78We.jpg"
-              alt="Card image cap"
-            />
+
             <div className="card-body little-profile text-center">
               <div className="pro-img">
                 <img src={user.url} alt="userimage" />
               </div>
-              <h3 className="m-b-0">{user.Name}</h3>
-              <p>Email : {user.email}</p>
-              <p>Gender : {user.gender}</p>
-              <p>Designation : {user.designation}</p>
-              <div className="row text-center m-t-20">
-                <div className="col-lg-4 col-md-4 m-t-20">
-                  <button className="gobackbutton" onClick={() => navigate(-1)}>
-                    Go Back
-                  </button>
+              {isEditing ? (
+                <>
+                  <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      name="Name"
+                      value={editedUser.Name}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="email"
+                      name="email"
+                      value={editedUser.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="gender">Gender</label>
+                    <div className="genderForm">
+
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="gender"
+                        id="male"
+                        value="male"
+                        checked={editedUser.gender === "male"}
+                        onChange={handleChange}
+                      />
+                      <label className="form-check-label" htmlFor="male">
+                        Male
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="gender"
+                        id="female"
+                        value="female"
+                        checked={editedUser.gender === "female"}
+                        onChange={handleChange}
+                      />
+                      <label className="form-check-label" htmlFor="female">
+                        Female
+                      </label>
+                    </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="designation">Designation</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="designation"
+                      name="designation"
+                      value={editedUser.designation}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h3 className="m-b-0">{user.Name}</h3>
+                  <p>Email : {user.email}</p>
+                  <p>Gender : {user.gender}</p>
+                  <p>Designation : {user.designation}</p>
+                  <div className="row text-center m-t-20">
+                    <div className="col-lg-4 col-md-4 m-t-20">
+                      <button
+                        className="gobackbutton"
+                        onClick={() => navigate(-1)}
+                      >
+                        Go Back
+                      </button>
+                    </div>
+                    <div className="col-lg-4 col-md-4 m-t-20">
+                      <button
+                        className="deletebutton"
+                        onClick={() => handleDelete(profileId.toString())}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    <div className="col-lg-4 col-md-4 m-t-20">
+                      <button onClick={handleEdit} className="editbutton">
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
+              {isEditing && (
+                <div className="row text-center m-t-20">
+                  <div className="col-lg-4 col-md-4 m-t-20">
+                    <button
+                      className="gobackbutton"
+                      onClick={handleCancel}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                  {/* <div className="col-lg-4 col-md-4 m-t-20">
+                    <button
+                      className="deletebutton"
+                      onClick={() => handleDelete(profileId.toString())}
+                    >
+                      Delete
+                    </button>
+                  </div> */}
+                  <div className="col-lg-4 col-md-4 m-t-20">
+                    <button onClick={handleSave} className="savebuttonedit">
+                      SAVE
+                    </button>
+                  </div>
                 </div>
-                <div className="col-lg-4 col-md-4 m-t-20">
-                  <button
-                    className="deletebutton"
-                    onClick={() => handleDelete(profileId.toString())}
-                  >
-                    Delete
-                  </button>
-                </div>
-                <div className="col-lg-4 col-md-4 m-t-20">
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="editbutton"
-                  >
-                    Edit
-                  </button>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
       </div>
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={() => setIsModalOpen(false)}>
-              &times;
-            </span>
-            <form onSubmit={handleSave}>
-              <div className="form-group">
-                <label htmlFor="name">Name:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  name="name"
-                  value={editedUser.Name}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email:</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  name="email"
-                  value={editedUser.email}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="gender">Gender:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="gender"
-                  name="gender"
-                  value={editedUser.gender}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="designation">Designation:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="designation"
-                  name="designation"
-                  value={editedUser.designation}
-                  onChange={handleChange}
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
     </>
   );
 };

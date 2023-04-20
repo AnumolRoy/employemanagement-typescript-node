@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { sp } from "@pnp/sp-commonjs";
+import { log } from "console";
 // import { SPFetchClient } from "@pnp/nodejs-commonjs";
 const fs = require("fs");
 
@@ -51,6 +52,46 @@ const getAllEmployeesById = async (req: Request, res: Response) => {
 };
 
 export { getAllEmployeesById };
+
+const getDocumentsById = async (req: Request, res: Response) => {
+  console.log("logggggggggggggggggggggggg", req.params);
+
+  const Id = req.params.id;
+  console.log(Id, "iddddddddd");
+
+  if (!Number.isInteger(Number(Id))) {
+    return res.status(400).json({ error: "Invalid ID" });
+  }
+  try {
+    console.log("checkingggggggg");
+    // const documentLibraryName = `DocumentAnu`;
+    // console.log(documentLibraryName);
+    // const documentLibrary = await sp.web.lists
+    //   .getByTitle(documentLibraryName)
+    //   .items.getById(Number(Id))
+    //   .get();
+
+    const documentLibraryName = "DocumentAnu";
+    const folderUrl = `DocumentAnu/${Id}`; // Replace this with the URL of the folder you want to get documents from
+    const documentLibrary = await sp.web
+      .getFolderByServerRelativeUrl(folderUrl)
+      .files.select("Name", "ServerRelativeUrl")
+      .get();
+    console.log(documentLibrary);
+
+    // const response = await sp.web.lists
+    //   .getByTitle(documentLibrary)
+    //   .items.getById(Number(Id))
+    //   .get();
+    console.log(documentLibrary, "-------------------");
+    return res.json(documentLibrary);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
+export { getDocumentsById };
 
 const AddEmployees = async (req: Request, res: Response) => {
   try {
@@ -136,31 +177,41 @@ const deleteEmployees = async (req: Request, res: Response) => {
 
 export { deleteEmployees };
 
-
-//update single user by id  
+//update single user by id
 export const updateSingleEmployee = async (req: Request, res: Response) => {
-  const { profileId } = req.params;
-  const { Name, email, designation,gender } = req.body;
-  console.log(profileId)
+  console.log(req.params,"paramsssssssssssssssssssssss");
+  
+  // const { id } = req.params;
+  console.log(req.body,"iiiiiiiiiiiiiiiiiiiiii");
+  
+  const { name, email, designation, gender } = req.body;
+  console.log(req.params.id);
 
-  const Id = Number(profileId);
+
+  const Id = Number(req.params.id);
 
   if (isNaN(Id)) {
     res.status(400).json({
       success: false,
-      message: 'Invalid ID provided'
+      message: "Invalid ID provided",
     });
     return;
   }
 
   const updateEmployee = {
-    name: Name,
+    Name: name,
     email: email,
     designation: designation,
-    gender:gender,
+    gender: gender,
   };
 
-  const employee = await sp.web.lists.getByTitle("Contactslists").items.getById(Id).update(updateEmployee);
+  console.log(updateEmployee,"update employeeeeeeee");
+  
+
+  const employee = await sp.web.lists
+    .getByTitle("Contactslist")
+    .items.getById(Id)
+    .update(updateEmployee);
 
   res.status(200).json({
     success: true,

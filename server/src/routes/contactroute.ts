@@ -15,14 +15,16 @@ import {
   deleteEmployees,
   getAllEmployees,
   getAllEmployeesById,
+  getDocumentsById,
   updateSingleEmployee,
 } from "../controller/contactcontroller";
 const router = express.Router();
 router.get("/", getAllEmployees);
 router.get("/:id", getAllEmployeesById);
+router.get("/documents/:id", getDocumentsById);
 router.post("/add-user", AddEmployees);
 router.delete("/deleteuser/:id", deleteEmployees);
-router.put("/update/:Id",updateSingleEmployee)
+router.put("/updateuser/:id",updateSingleEmployee)
 // router.post("/upload/:id",AddUser)
 
 // router.post('/upload-image', upload.single('image'), (req: CustomRequest, res) => {

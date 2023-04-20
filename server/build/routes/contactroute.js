@@ -15,9 +15,10 @@ const contactcontroller_1 = require("../controller/contactcontroller");
 const router = express_1.default.Router();
 router.get("/", contactcontroller_1.getAllEmployees);
 router.get("/:id", contactcontroller_1.getAllEmployeesById);
+router.get("/documents/:id", contactcontroller_1.getDocumentsById);
 router.post("/add-user", contactcontroller_1.AddEmployees);
 router.delete("/deleteuser/:id", contactcontroller_1.deleteEmployees);
-router.put("/update/:Id", contactcontroller_1.updateSingleEmployee);
+router.put("/updateuser/:id", contactcontroller_1.updateSingleEmployee);
 // router.post("/upload/:id",AddUser)
 // router.post('/upload-image', upload.single('image'), (req: CustomRequest, res) => {
 //     const image = req.file.buffer; // access the uploaded file buffer
