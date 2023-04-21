@@ -56,7 +56,7 @@ const Card: React.FC<CardProps> = ({ users }) => {
 
   // Function to handle adding a new user to the user list
   const handleAddUser = async (newUser: User) => {
-    console.log(userList, "userlist");
+    console.log(userList, "userlist1111111111111111111111111");
 
     const updatedList = [...userList, newUser];
     setTest(!test);
@@ -127,6 +127,8 @@ const Card: React.FC<CardProps> = ({ users }) => {
     console.log(`Card with id ${Number(Id)} clicked`);
     navigate(`/profilebvc/${Number(Id)}`);
   };
+
+  console.log(userList,"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
   return (
     <div className="container">
       <div>

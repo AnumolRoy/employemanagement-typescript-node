@@ -2,6 +2,8 @@ import { useState } from "react";
 import "../../styles/adduser.css";
 import * as React from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+
 // import { useNavigate } from 'react-router-dom';
 
 interface AddUserProps {
@@ -102,13 +104,20 @@ function AddUser({ onAddUser, setShowCard, id }: AddUserProps): JSX.Element {
       designation,
     };
 
+    if (selectedFile) {
+      console.log(selectedFile, "++++++++++");
+      console.log("image upload clicked");
+      const formData = new FormData();
+    formData.append("image", selectedFile);
+    formData.append("user", JSON.stringify(newUser));
+
     try {
       const response = await axios.post(
         "http://localhost:3005/get/add-user",
-        newUser,
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -118,31 +127,52 @@ function AddUser({ onAddUser, setShowCard, id }: AddUserProps): JSX.Element {
       console.error(error);
     }
 
-    const folderId = addedusers.data.Id;
+    // const folderId = addedusers.data.Id;
 
-    const documentLibraryNameImage = `DocumentAnu/${folderId}`;
-    const fileNamePath = `profile.png`;
+    // const documentLibraryNameImage = `DocumentAnu/${folderId}`;
+    // const fileNamePath = `profile.png`;
 
-    if (selectedFile) {
-      console.log(selectedFile, "++++++++++");
-      console.log("image upload clicked");
-      let formData = new FormData();
-      formData.append("file", selectedFile);
+    // if (selectedFile) {
+    //   console.log(selectedFile, "++++++++++");
+    //   console.log("image upload clicked");
+    //   const formData = new FormData();
+    // formData.append("image", selectedFile);
 
-      console.log(formData.get("file"));
-      console.log(selectedFile, "afterrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+    // try {
+    //   const response = await axios.put(
+    //     `http://localhost:3005/get/imageupload/${folderId}`,
+    //     formData,
+    //     {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data",
+    //       },
+    //     }
+    //   );
+    //   console.log(response.data,"response of image upload");
+    //   toast.success("Profile pic uploaded sucsesfuly", {
+    //     className: "toastify-success",
+    //   });
+    //   window.location.reload();
+    // } catch (error) {
+    //   console.error(error);
+    // }
+    //   let formData = new FormData();
+    //   formData.append("file", selectedFile);
 
-      try {
-        const res = await axios.post(
-          `http://localhost:3005/get/upload/${folderId}`,
-          formData
-        );
-        console.log(res, "res log");
+    //   console.log(formData.get("file"));
+    //   console.log(selectedFile, "afterrrrrrrrrrrrrrrrrrrrrrrrrrrr");
 
-        // window.location.reload()
-      } catch (error) {
-        console.log(error);
-      }
+    //   try {
+    //     const res = await axios.post(
+    //       `http://localhost:3005/get/upload/${folderId}`,
+    //       formData
+    //     );
+    //     console.log(res, "res log");
+
+    //     // window.location.reload()
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
     }
   };
 
@@ -221,7 +251,7 @@ function AddUser({ onAddUser, setShowCard, id }: AddUserProps): JSX.Element {
             <div className="input_wrap">
   <label>Profile Picture</label>
   <input type="file" onChange={handleFileInputChange} style={{ display: 'inline-block' }} />
-  <button type="submit" onClick={handleUploadClick } className="submit_btn save" style={{ display: 'inline-block', marginLeft: '10px' }}>
+  <button type="submit" onClick={handleUploadClick} className="submit_btn save" style={{ display: 'inline-block', marginLeft: '10px' }}>
     Save
   </button>
   {selectedFile && <div></div>}

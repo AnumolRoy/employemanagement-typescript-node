@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateSingleEmployee = exports.deleteEmployees = exports.AddUser = exports.AddEmployees = exports.getDocumentsById = exports.getAllEmployeesById = exports.getAllEmployees = void 0;
+exports.uploadImage = exports.updateSingleEmployee = exports.deleteEmployees = exports.AddEmployees = exports.getDocumentsById = exports.getAllEmployeesById = exports.getAllEmployees = void 0;
 const sp_commonjs_1 = require("@pnp/sp-commonjs");
 // import { SPFetchClient } from "@pnp/nodejs-commonjs";
 const fs = require("fs");
@@ -84,13 +84,24 @@ const getDocumentsById = (req, res) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.getDocumentsById = getDocumentsById;
 const AddEmployees = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c, _d;
+    console.log("test");
+    // console.log(req.body.user, "multer lessssssssssss");
+    const userData = JSON.parse(req.body.user);
+    console.log(userData, "user data");
+    const fileBuffer = fs.readFileSync((_a = req.file) === null || _a === void 0 ? void 0 : _a.path);
+    // console.log(fileBuffer, "file buffer");
+    console.log(req.file, "image file");
+    console.log((_b = req.file) === null || _b === void 0 ? void 0 : _b.path, "image file path");
+    const image = req === null || req === void 0 ? void 0 : req.file;
+    console.log(image, "+++++++++++++++++++++++++");
     try {
         const newUser = {
-            Id: req.body.Id,
-            Name: req.body.Name,
-            email: req.body.email,
-            gender: req.body.gender,
-            designation: req.body.designation,
+            Id: userData.Id,
+            Name: userData.Name,
+            email: userData.email,
+            gender: userData.gender,
+            designation: userData.designation,
         };
         // console.log("new user log", newUser);
         const response = yield sp_commonjs_1.sp.web.lists.getByTitle("Contactslist").items.add({
@@ -99,8 +110,9 @@ const AddEmployees = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             gender: newUser.gender,
             designation: newUser.designation,
         });
-        //console.log(response)
+        console.log(response.data, "qwertyyyyyyyyyyyy");
         console.log(response.data.Id);
+        let id = response.data.Id;
         // console.log("logging response", response);
         const folderId = response.data.Id;
         const newFolderName = `${folderId}`;
@@ -111,7 +123,53 @@ const AddEmployees = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             .then(() => {
             console.log(`Folder '${newFolderName}' created successfully.`);
         });
-        return res.send(response);
+        const LibraryName = `DocumentAnu/${id}`;
+        const fileNamePath = `${image.filename}`;
+        console.log(image);
+        let result;
+        if ((image === null || image === void 0 ? void 0 : image.size) <= 10485760) {
+            // small upload
+            console.log("Starting small file upload");
+            result = yield sp_commonjs_1.sp.web
+                .getFolderByServerRelativePath(LibraryName)
+                .files.addUsingPath(fileNamePath, image, { Overwrite: true });
+            console.log(result, "resulttttttttttttttttttttttttttttttttt");
+        }
+        else {
+            // large upload
+            console.log("Starting large file upload");
+            // result = await sp.web
+            //   .getFolderByServerRelativePath(documentLibraryName)
+            //   .files.addChunked(
+            //     fileNamePath,
+            //     image,
+            //     () => {
+            //       console.log(`Upload progress: `);
+            //     },
+            //     true
+            //   );
+        }
+        console.log("Server relative URL:", (_c = result === null || result === void 0 ? void 0 : result.data) === null || _c === void 0 ? void 0 : _c.ServerRelativeUrl);
+        const imageurl = `https://2mxff3.sharepoint.com${(_d = result === null || result === void 0 ? void 0 : result.data) === null || _d === void 0 ? void 0 : _d.ServerRelativeUrl}`;
+        const list = sp_commonjs_1.sp.web.lists.getByTitle("Contactslist");
+        try {
+            yield list.items.getById(id).update({
+                url: imageurl,
+            });
+            console.log("File upload successful");
+            res.status(200).json({
+                success: true,
+                message: "Profile picture uploaded successfully",
+            });
+        }
+        catch (error) {
+            console.error("Error while updating employee item:", error);
+            res.status(500).json({
+                success: false,
+                message: "Error while updating employee item",
+            });
+        }
+        // return res.send(response);
     }
     catch (error) {
         console.log(error);
@@ -119,19 +177,18 @@ const AddEmployees = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.AddEmployees = AddEmployees;
-const AddUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        console.log("start..........._________________________________");
-        const { folderId } = req.params;
-        const file = req.body.file;
-        console.log(file, "fiseeeeeeeeeeeeeeeeeeeeee", folderId);
-    }
-    catch (error) {
-        console.log(error);
-        return res.status(500).json({ error: "Internal server error" });
-    }
-});
-exports.AddUser = AddUser;
+// const AddUser = async (req: Request, res: Response) => {
+//   try {
+//     console.log("start..........._________________________________");
+//     const { folderId } = req.params;
+//     const file = req.body.file;
+//     console.log(file, "fiseeeeeeeeeeeeeeeeeeeeee", folderId);
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({ error: "Internal server error" });
+//   }
+// };
+// export { AddUser };
 const deleteEmployees = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("delete employee");
     let id = Number.parseInt(req.params.id);
@@ -185,3 +242,54 @@ const updateSingleEmployee = (req, res) => __awaiter(void 0, void 0, void 0, fun
     });
 });
 exports.updateSingleEmployee = updateSingleEmployee;
+const uploadImage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("imagecheckinggggggggg");
+    console.log(req.params);
+    const { Id } = req.params;
+    console.log(req.files);
+    //  let image = (req?.files as any)?.image;
+    // console.log("imagetype",image)
+    // const id = Number(Id);
+    // if (!image) {
+    //   console.error('No file selected');
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: 'No file selected',
+    //   });
+    // }
+    // const documentLibraryName = `DocumentAnu/${Id}`;
+    // const fileNamePath = `profilepic.png`;
+    // let result: any;
+    // if (image?.size <= 10485760) {
+    //   // small upload
+    //   console.log('Starting small file upload');
+    //   result = await sp.web.getFolderByServerRelativePath
+    //   (documentLibraryName).files.addUsingPath(fileNamePath, image.data, { Overwrite: true });
+    // } else {
+    //   // large upload
+    //   console.log('Starting large file upload');
+    //   result = await sp.web.getFolderByServerRelativePath(documentLibraryName).files.addChunked(fileNamePath, image, ()  => {
+    //     console.log(`Upload progress: `);
+    //   }, true);
+    // }
+    // console.log('Server relative URL:', result?.data?.ServerRelativeUrl);
+    // const imageurl = `https://2mxff3.sharepoint.com${result?.data?.ServerRelativeUrl}`;
+    // const list = sp.web.lists.getByTitle('Employees');
+    // try {
+    //   await list.items.getById(id).update({
+    //     url: imageurl,
+    //   });
+    //   console.log('File upload successful');
+    //   res.status(200).json({
+    //     success: true,
+    //     message: 'Profile picture uploaded successfully',
+    //   });
+    // } catch (error) {
+    //   console.error('Error while updating employee item:', error);
+    //   res.status(500).json({
+    //     success: false,
+    //     message: 'Error while updating employee item',
+    //   });
+    // }
+});
+exports.uploadImage = uploadImage;

@@ -11,24 +11,24 @@ interface Document {
   Name: string;
   url: string;
 }
-const files = [
-  {
-    name: "Document 1",
-    url: "https://example.com/document-1.pdf",
-  },
-  {
-    name: "Document 2",
-    url: "https://example.com/document-2.docx",
-  },
-  {
-    name: "Image 1",
-    url: "https://example.com/image-1.jpg",
-  },
-  {
-    name: "Spreadsheet 1",
-    url: "https://example.com/spreadsheet-1.xlsx",
-  },
-];
+// const files = [
+//   {
+//     name: "Document 1",
+//     url: "https://example.com/document-1.pdf",
+//   },
+//   {
+//     name: "Document 2",
+//     url: "https://example.com/document-2.docx",
+//   },
+//   {
+//     name: "Image 1",
+//     url: "https://example.com/image-1.jpg",
+//   },
+//   {
+//     name: "Spreadsheet 1",
+//     url: "https://example.com/spreadsheet-1.xlsx",
+//   },
+// ];
 // interface DocumentProps(){
 //   users:User[];
 // }
