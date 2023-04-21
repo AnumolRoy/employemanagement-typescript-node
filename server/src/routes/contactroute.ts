@@ -24,18 +24,8 @@ router.get("/:id", getAllEmployeesById);
 router.get("/documents/:id", getDocumentsById);
 router.post("/add-user", AddEmployees);
 router.delete("/deleteuser/:id", deleteEmployees);
-router.put("/updateuser/:id",updateSingleEmployee)
-// router.post("/upload/:id",AddUser)
+router.put("/updateuser/:id", updateSingleEmployee);
 
-// router.post('/upload-image', upload.single('image'), (req: CustomRequest, res) => {
-//     const image = req.file.buffer; // access the uploaded file buffer
-//     // do something with the image buffer
-//     res.send('Image uploaded successfully');
-//   });
-// router.post('/upload', (req: CustomRequest, res:Response) => {
-//     const image = req.file.buffer;
-//     // handle the uploaded file here
-//   });
 const storage = multer.diskStorage({
   destination: function (req: any, file: any, cb: any) {
     cb(null, "./uploads/");

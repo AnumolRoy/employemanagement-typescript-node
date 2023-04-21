@@ -221,7 +221,7 @@ function AddUser({ onAddUser, setShowCard, id }: AddUserProps): JSX.Element {
             <div className="input_wrap">
   <label>Profile Picture</label>
   <input type="file" onChange={handleFileInputChange} style={{ display: 'inline-block' }} />
-  <button type="submit" className="submit_btn save" style={{ display: 'inline-block', marginLeft: '10px' }}>
+  <button type="submit" onClick={handleUploadClick } className="submit_btn save" style={{ display: 'inline-block', marginLeft: '10px' }}>
     Save
   </button>
   {selectedFile && <div></div>}

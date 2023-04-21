@@ -19,16 +19,6 @@ router.get("/documents/:id", contactcontroller_1.getDocumentsById);
 router.post("/add-user", contactcontroller_1.AddEmployees);
 router.delete("/deleteuser/:id", contactcontroller_1.deleteEmployees);
 router.put("/updateuser/:id", contactcontroller_1.updateSingleEmployee);
-// router.post("/upload/:id",AddUser)
-// router.post('/upload-image', upload.single('image'), (req: CustomRequest, res) => {
-//     const image = req.file.buffer; // access the uploaded file buffer
-//     // do something with the image buffer
-//     res.send('Image uploaded successfully');
-//   });
-// router.post('/upload', (req: CustomRequest, res:Response) => {
-//     const image = req.file.buffer;
-//     // handle the uploaded file here
-//   });
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "./uploads/");

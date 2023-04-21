@@ -150,7 +150,6 @@ const Card: React.FC<CardProps> = ({ users }) => {
               <div className="card-container">
                 {/* Mapping over the user list to show each user */}
                 {userList.map((item) => {
-                  // console.log(item,"hhhhh")
                   return (
                     <div
                       key={item.Id}
@@ -158,20 +157,20 @@ const Card: React.FC<CardProps> = ({ users }) => {
                       onClick={() => handleCardClick(item.Id.toString())}
                     >
                       <div className="imge">
-                        {item.url ? (
+                        {/* {item.url ? ( */}
                           <img
                             src={`${item.url}`}
                             alt="User Image"
                             className="imge"
                           />
-                        ) : (
+                        {/* ) : (
                           <img
                             src="https://o.remove.bg/downloads/7ba90c9b-979c-4513-9440-4acd6bc894e4/images-removebg-preview.png"
                             alt=""
                           />
-                        )}
+                        )} */}
                       </div>
-                      <div className="details" style={{ fontWeight: "bold" }}>
+                      <div className="details" >
                         <h3>Name: {item.Name}</h3>
                         <h5>email: {item.email}</h5>
                         <h5>gender: {item.gender}</h5>

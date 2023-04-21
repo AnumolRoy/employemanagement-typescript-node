@@ -215,7 +215,7 @@ export const updateSingleEmployee = async (req: Request, res: Response) => {
 
   res.status(200).json({
     success: true,
-    message: " Succesfully Updated  Employee Details",
+    message: " Succesfully Updated  user Details",
     employee,
   });
 };

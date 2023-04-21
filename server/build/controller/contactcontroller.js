@@ -180,7 +180,7 @@ const updateSingleEmployee = (req, res) => __awaiter(void 0, void 0, void 0, fun
         .update(updateEmployee);
     res.status(200).json({
         success: true,
-        message: " Succesfully Updated  Employee Details",
+        message: " Succesfully Updated  user Details",
         employee,
     });
 });

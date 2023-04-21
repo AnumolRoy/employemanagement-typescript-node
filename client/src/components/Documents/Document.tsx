@@ -132,15 +132,7 @@ const Documents: React.FC = () => {
         </ul>
       </div>
 
-      {/* <ul>
-        {documents.map((document) => (
-          <li key={document.Id}>
-            <a href={document.url} target="_blank" rel="noopener noreferrer">
-              {document.Name}
-            </a>
-          </li>
-        ))}
-      </ul> */}
+      
     </div>
   );
 };
