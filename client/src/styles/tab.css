@@ -1,15 +1,24 @@
 .tabcontainer {
   margin-top: -6px;
-  margin-left: -32px;
+  margin-left: -286px;
+  background-color: white;
 }
 
 .back-button {
   margin-left: 26px;
-  margin-top: 10px;
-  color: #fff;
+  margin-top: 8px;
+  color: #ffffff;
   background-color: #0d55da;
   border: none;
   padding: 0 20px;
-  width: 329px;
-  height: 70px;
+  width: 400px;
+  height: 33px;
+}
+.backicon-button {
+  margin-left: 15px;
+  background-color: #0d55da;
+}
+.back-button:hover {
+  background-color: #fbfcff;
+  color: #0e0d0d;
 }

@@ -5,6 +5,11 @@ import AddUser from "../AddUser/AddUser";
 import "../../styles/card.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { GrInstagram } from "react-icons/gr";
+import { GrLinkedinOption } from "react-icons/gr";
+import { GrMailOption } from "react-icons/gr";
+import { FiTwitter } from "react-icons/fi";
+import { GrFacebookOption } from "react-icons/gr";
 
 interface User {
   Name: string;
@@ -23,12 +28,10 @@ const Card: React.FC<CardProps> = ({ users }) => {
   const [userList, setUserList] = useState<User[]>([]);
   const [test, setTest] = useState<boolean>(true);
   const [showCard, setShowCard] = useState<boolean>(true);
-    const [oldUsers, setOldUsers] = useState<boolean>(true);
+  const [oldUsers, setOldUsers] = useState<boolean>(true);
   const [notFound, setNotFound] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log("use effect ----------------");
-
     axios
       .get("http://localhost:3005/get", {
         headers: {
@@ -49,15 +52,11 @@ const Card: React.FC<CardProps> = ({ users }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    (async () => {
-      console.log("first");
-    })();
+    (async () => {})();
   }, [users]);
 
   // Function to handle adding a new user to the user list
   const handleAddUser = async (newUser: User) => {
-    console.log(userList, "userlist1111111111111111111111111");
-
     const updatedList = [...userList, newUser];
     setTest(!test);
     setUserList(updatedList);
@@ -65,38 +64,6 @@ const Card: React.FC<CardProps> = ({ users }) => {
     // Setting showCard back to true to show the user list again
     setShowCard(true);
   };
-
-  // async function handleUpdate(Id: number): Promise<void> {
-  //   console.log(Id);
-
-  //   const name = window.prompt("Enter the new name of the contact:");
-  //   const Email = window.prompt("Enter the new email of the contact:");
-  //   const Gender = window.prompt("Enter the new gender of the contact:");
-  //   const Designation = window.prompt("Enter the new designation of the contact:");
-
-  //   try {
-  //     // const contactItem = sp.web.lists.getByTitle("Contactslist").items.getById(Id);
-  //     // if (contactItem) {
-  //     //   // Update the item by ID
-  //     //   await sp.web.lists.getByTitle("Contactslist").items.getById(Id).update({
-  //     //     Name: name,
-  //     //     email: Email,
-  //     //     gender: Gender,
-  //     //     designation: Designation,
-
-  //       });
-
-  //       console.log(`Item ${Id} updated successfully.`);
-  //       alert("Item updated successfully.");
-  //     } else {
-  //       console.log(`Item ${Id} does not exist.`);
-  //       alert("Item does not exist.");
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     alert("An error occurred while updating the item.");
-  //   }
-  // }
 
   // Function to handle searching for users by name
   const handleSearch = (searchText: string) => {
@@ -128,7 +95,6 @@ const Card: React.FC<CardProps> = ({ users }) => {
     navigate(`/profilebvc/${Number(Id)}`);
   };
 
-  console.log(userList,"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
   return (
     <div className="container">
       <div>
@@ -159,24 +125,31 @@ const Card: React.FC<CardProps> = ({ users }) => {
                       onClick={() => handleCardClick(item.Id.toString())}
                     >
                       <div className="imge">
-                        {/* {item.url ? ( */}
+                        {item.url ? (
                           <img
                             src={`${item.url}`}
                             alt="User Image"
                             className="imge"
                           />
-                        {/* ) : (
+                        ) : (
                           <img
                             src="https://o.remove.bg/downloads/7ba90c9b-979c-4513-9440-4acd6bc894e4/images-removebg-preview.png"
                             alt=""
                           />
-                        )} */}
+                        )}
                       </div>
-                      <div className="details" >
-                        <h3>Name: {item.Name}</h3>
-                        <h5>email: {item.email}</h5>
-                        <h5>gender: {item.gender}</h5>
-                        <h5>designation: {item.designation}</h5>
+                      <div className="details">
+                        <h3>Name : {item.Name}</h3>
+                        <h5>Email : {item.email}</h5>
+                        <h5>Gender : {item.gender}</h5>
+                        <h5>Designation : {item.designation}</h5>
+                      </div>
+                      <div className="icons">
+                        <GrInstagram />
+                        <GrFacebookOption />
+                        <GrLinkedinOption />
+                        <GrMailOption />
+                        <FiTwitter />
                       </div>
                     </div>
                   );

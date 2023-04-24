@@ -2,9 +2,10 @@ import { useState } from "react";
 import "../../styles/adduser.css";
 import * as React from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
-
-// import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
+import { FiFile } from "react-icons/fi";
 
 interface AddUserProps {
   onAddUser: (user: User) => void;
@@ -79,6 +80,7 @@ function AddUser({ onAddUser, setShowCard, id }: AddUserProps): JSX.Element {
     setGender("");
     setDesignation("");
     setShowCard(true);
+    toast.success('User added successfully!');
   };
 
   const handleFileInputChange = (
@@ -89,7 +91,6 @@ function AddUser({ onAddUser, setShowCard, id }: AddUserProps): JSX.Element {
     }
   };
 
-  
   const handleUploadClick = async () => {
     if (!selectedFile) {
       console.error("No file selected");
@@ -105,79 +106,36 @@ function AddUser({ onAddUser, setShowCard, id }: AddUserProps): JSX.Element {
     };
 
     if (selectedFile) {
-      console.log(selectedFile, "++++++++++");
-      console.log("image upload clicked");
+      console.log(selectedFile);
       const formData = new FormData();
-    formData.append("image", selectedFile);
-    formData.append("user", JSON.stringify(newUser));
+      formData.append("image", selectedFile);
+      formData.append("user", JSON.stringify(newUser));
 
-    try {
-      const response = await axios.post(
-        "http://localhost:3005/get/add-user",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log("response log in add user", response.data);
-      addedusers = response.data;
-    } catch (error) {
-      console.error(error);
-    }
-
-    // const folderId = addedusers.data.Id;
-
-    // const documentLibraryNameImage = `DocumentAnu/${folderId}`;
-    // const fileNamePath = `profile.png`;
-
-    // if (selectedFile) {
-    //   console.log(selectedFile, "++++++++++");
-    //   console.log("image upload clicked");
-    //   const formData = new FormData();
-    // formData.append("image", selectedFile);
-
-    // try {
-    //   const response = await axios.put(
-    //     `http://localhost:3005/get/imageupload/${folderId}`,
-    //     formData,
-    //     {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     }
-    //   );
-    //   console.log(response.data,"response of image upload");
-    //   toast.success("Profile pic uploaded sucsesfuly", {
-    //     className: "toastify-success",
-    //   });
-    //   window.location.reload();
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    //   let formData = new FormData();
-    //   formData.append("file", selectedFile);
-
-    //   console.log(formData.get("file"));
-    //   console.log(selectedFile, "afterrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-
-    //   try {
-    //     const res = await axios.post(
-    //       `http://localhost:3005/get/upload/${folderId}`,
-    //       formData
-    //     );
-    //     console.log(res, "res log");
-
-    //     // window.location.reload()
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
+      try {
+        const response = await axios.post(
+          "http://localhost:3005/get/add-user",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("response log in add user", response.data);
+        addedusers = response.data;
+        toast.error("user added Succesfuly", {
+          className: "toastify-error",
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
   // Return the form with input fields for the user's name, email, gender, and designation, along with Save and Cancel buttons
   return (
+    <div>
+           
     <div className="wrapper">
       <div className="registration_form">
         <div className="title">Add Employee</div>
@@ -186,10 +144,13 @@ function AddUser({ onAddUser, setShowCard, id }: AddUserProps): JSX.Element {
           <div className="form_wrap">
             <div className="input_grp">
               <div className="input_wrap">
-                <label> Name</label>
+                <label>
+                  <AiOutlineUser /> Name
+                </label>
                 <input
                   className="input_field"
                   type="text"
+                  placeholder="Name"
                   value={Name}
                   onChange={(e) => setName(e.target.value)}
                   // onBlur={validateName}
@@ -198,9 +159,13 @@ function AddUser({ onAddUser, setShowCard, id }: AddUserProps): JSX.Element {
               </div>
             </div>
             <div className="input_wrap">
-              <label>Email Address</label>
+              <label>
+                <AiOutlineMail />
+                Email Address
+              </label>
               <input
                 className="input_field"
+                placeholder="email"
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -239,6 +204,7 @@ function AddUser({ onAddUser, setShowCard, id }: AddUserProps): JSX.Element {
               <label>Designation</label>
               <input
                 className="input_field"
+                placeholder="designation"
                 type="text"
                 value={designation}
                 onChange={(e) => setDesignation(e.target.value)}
@@ -249,24 +215,37 @@ function AddUser({ onAddUser, setShowCard, id }: AddUserProps): JSX.Element {
               )}
             </div>
             <div className="input_wrap">
-  <label>Profile Picture</label>
-  <input type="file" onChange={handleFileInputChange} style={{ display: 'inline-block' }} />
-  <button type="submit" onClick={handleUploadClick} className="submit_btn save" style={{ display: 'inline-block', marginLeft: '10px' }}>
-    Save
-  </button>
-  {selectedFile && <div></div>}
-  <button
-    type="button"
-    className="submit_btn cancel"
-    onClick={() => setShowCard(true)}
-  >
-    Cancel
-  </button>
-</div>
-
+              <label>
+                <FiFile />
+                Profile Picture
+              </label>
+              <input
+                type="file"
+                onChange={handleFileInputChange}
+                style={{ display: "inline-block" }}
+              />
+              <button
+                type="submit"
+                onClick={handleUploadClick}
+                className="submit_btn save"
+                style={{ display: "inline-block", marginLeft: "10px" }}
+              >
+                Save
+              </button>
+              {selectedFile && <div></div>}
+              <button
+                type="button"
+                className="submit_btn cancel"
+                onClick={() => setShowCard(true)}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </form>
       </div>
+    </div>
+   
     </div>
   );
 }

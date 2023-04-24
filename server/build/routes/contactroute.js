@@ -14,17 +14,6 @@ const storage = multer_1.default.diskStorage({
         cb(null, file.originalname);
     },
 });
-// const fileFilter = (req: any, file: any, cb: any) => {
-//   if (
-//     file.mimetype === "image/jpg" ||
-//     file.mimetype === "image/jpeg" ||
-//     file.mimetype === "image/png"
-//   ) {
-//     cb(null, true);
-//   } else {
-//     cb(new Error("Image uploaded is not of type jpg/jpeg or png"), false);
-//   }
-// };
 const upload = (0, multer_1.default)({ storage: storage });
 const router = express_1.default.Router();
 router.get("/", contactcontroller_1.getAllEmployees);
@@ -34,4 +23,6 @@ router.post("/add-user", upload.single("image"), contactcontroller_1.AddEmployee
 router.delete("/deleteuser/:id", contactcontroller_1.deleteEmployees);
 router.put("/updateuser/:id", contactcontroller_1.updateSingleEmployee);
 router.put("/imageupload/:Id", contactcontroller_1.uploadImage);
+router.put("getdocument/:Id", upload.single("image"), contactcontroller_1.uploadDocument);
+router.route("document/download").get(contactcontroller_1.downloadFile);
 exports.default = router;

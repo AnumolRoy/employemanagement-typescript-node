@@ -71,8 +71,19 @@ input[type="email"] {
   margin-top: 5px;
   margin-bottom: 10px;
   outline: none;
-  box-shadow: 0 0 20px rgba(10, 139, 190, 0.808);
+  box-shadow: 0 0 10px rgba(10, 139, 190, 0.808);
   font-style: italic;
+}
+.toastify-error{
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  z-index: 9999;
+  animation: slideInRight 0.5s, slideOutRight 0.5s 2.5s forwards;
 }
 
 input[type="text"]:focus,
@@ -132,4 +143,5 @@ input[type="email"]:focus {
 .submit_btn.cancel {
   background-color: #ff4d4f;
   color: #fff;
+  margin-left: 11px;
 }

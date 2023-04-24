@@ -121,9 +121,44 @@ a:hover {
 }
 
 #image{
-  height: 100px;
+  height: 46px;
 }
 
 #document{
   width: 5%;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid grey;
+}
+
+th,
+td {
+  padding: 1.5rem;
+  text-align: left;
+}
+td{
+  font-size: 13px;
+}
+
+th.name-column {
+  width: 30%;
+}
+
+th.type-column {
+  width: 20%;
+}
+
+th.modified-column {
+  width: 20%;
+}
+
+tbody tr:hover {
+  background-color: #f6f6f6;
+}
+#document{
+  height: 30px;
+  width: 30px;
 }

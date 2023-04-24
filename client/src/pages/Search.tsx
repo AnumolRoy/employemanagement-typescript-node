@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import * as React from "react";
 
 export interface Props {
@@ -21,9 +21,7 @@ function Search({ onSearch }: Props): JSX.Element {
   // Render the search input field
   return (
     <div className="mb-4">
-      <label className="block ">
-        Search
-      </label>
+      <label className="block "></label>
       <input
         className="shadow "
         type="text"
