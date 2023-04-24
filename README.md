@@ -1,39 +1,24 @@
 # Employeemanagement!
-homepage
-![Screenshot (14)](https://user-images.githubusercontent.com/108685775/233064124-a55ac409-ec7e-4fdf-bca8-699da19ec619.png)
 
-![Screenshot (15)](https://user-images.githubusercontent.com/108685775/233064140-e94f2976-2f90-41fe-a02e-22a5240b957d.png)
+Homepage
+![Screenshot (49)](https://user-images.githubusercontent.com/108685775/233925450-0f92c62c-0ad5-4a50-98c9-26df5c1be39d.png
+![Screenshot (50)](https://user-images.githubusercontent.com/108685775/233925534-5146d64f-4635-47d9-bb2f-ebce7c55ae2c.png)
 
-![Screenshot (16)](https://user-images.githubusercontent.com/108685775/233064153-cb3138b4-1895-4cfa-a95b-f08b8d65db66.png)
-
-<<<<<<< Updated upstream
 search
-![Screenshot (29)](https://user-images.githubusercontent.com/108685775/233073998-04025c44-6960-41ef-9236-a82902a3c079.png)
+![Screenshot (51)](https://user-images.githubusercontent.com/108685775/233925638-4fc53ea0-f6ae-4c16-9000-4755ba4a29fc.png)
 
-Adduser
-![Screenshot (26)](https://user-images.githubusercontent.com/108685775/233064206-41bcf1f2-4c72-46ab-b43f-b1ac0becfb92.png)
+search 404
+![Screenshot (52)](https://user-images.githubusercontent.com/108685775/233925717-d2fc8770-ce4a-40e7-bb93-7187c70c6fb1.png)
 
-validation
-![Screenshot (27)](https://user-images.githubusercontent.com/108685775/233064228-39edfaf2-5675-484b-a935-a82e73e4cef3.png)
+addemployee
+![Screenshot (53)](https://user-images.githubusercontent.com/108685775/233925775-2962f26c-8b55-446e-8cc1-114bb6bab034.png)
+![Screenshot (54)](https://user-images.githubusercontent.com/108685775/233925785-90ae6458-585e-4c91-afee-ee3d3586d4bd.png)
 
-view profile
-![Screenshot (36)](https://user-images.githubusercontent.com/108685775/233262293-f0ce8564-657c-4e85-9947-08439b428543.png)
+viewprofile
+![Screenshot (55)](https://user-images.githubusercontent.com/108685775/233925827-f200c0f1-b5c9-4f80-b038-0951ce250044.png)
 
-editpage
-![Screenshot (37)](https://user-images.githubusercontent.com/108685775/233262330-7e2fa1de-fcf9-4dfa-a130-fca9946ee2cc.png)
-=======
-![Screenshot (29)](https://user-images.githubusercontent.com/108685775/233073998-04025c44-6960-41ef-9236-a82902a3c079.png)
+profile edit delete
+![Screenshot (56)](https://user-images.githubusercontent.com/108685775/233925885-41dc5128-2eea-4b9e-a360-759e8f634ffb.png)
 
-![Screenshot (26)](https://user-images.githubusercontent.com/108685775/233064206-41bcf1f2-4c72-46ab-b43f-b1ac0becfb92.png)
-
-![Screenshot (27)](https://user-images.githubusercontent.com/108685775/233064228-39edfaf2-5675-484b-a935-a82e73e4cef3.png)
-
-![Screenshot (19)](https://user-images.githubusercontent.com/108685775/233064254-e164b516-894b-4272-a378-0695343df57c.png)
-
-![Screenshot (20)](https://user-images.githubusercontent.com/108685775/233064268-7dc7fb20-b49d-48ba-bca7-3af26037fd5d.png)
->>>>>>> Stashed changes
-
-![Screenshot (23)](https://user-images.githubusercontent.com/108685775/233064274-df441f67-b51f-4ba2-8a6f-61c54db961dd.png)
-
-userdocument
-![Screenshot (39)](https://user-images.githubusercontent.com/108685775/233263146-de61093d-9b08-4c81-bb2c-2e79e753d316.png)
+documentpage
+![Screenshot (57)](https://user-images.githubusercontent.com/108685775/233925962-bbd0e9f4-9bbc-40d9-aa44-adcbc793af32.png)
