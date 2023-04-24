@@ -22,3 +22,7 @@
   background-color: #fbfcff;
   color: #0e0d0d;
 }
+.back-button.active {
+  background-color: white;
+  color: black;
+}

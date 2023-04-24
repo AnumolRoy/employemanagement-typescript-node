@@ -7,7 +7,18 @@ interface ITabProps {
   Id: number;
   Name: string;
 }
+
 const Tab: React.FC<ITabProps> = ({ Id, Name }) => {
+  const [activeTab, setActiveTab] = React.useState<string>("profile");
+
+  const handleProfileClick = () => {
+    setActiveTab("Profile");
+  };
+
+  const handleDocumentClick = () => {
+    setActiveTab("Document");
+  };
+
   return (
     <div className="tabcontainer">
       <Link to="/">
@@ -17,11 +28,23 @@ const Tab: React.FC<ITabProps> = ({ Id, Name }) => {
           <FaArrowLeft />{" "}
         </button>
       </Link>
-      <Link to="/profilebvc/:Id">
-        <button className="back-button">Profile</button>
+      <Link to={`/profilebvc/${Id}`}>
+        <button
+          className={`back-button ${activeTab === "Profile" ? "active" : ""}`}
+          onClick={handleProfileClick}
+        >
+          Profile
+        </button>
       </Link>
       <Link to={`/document/${Id}?name=${encodeURIComponent(Name)}`}>
-        <button className="back-button">Documents</button>
+        <button
+          className={`back-button ${
+            activeTab === "Document" ? "active" : ""
+          }`}
+          onClick={handleDocumentClick}
+        >
+          Documents
+        </button>
       </Link>
     </div>
   );

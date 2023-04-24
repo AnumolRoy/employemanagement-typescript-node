@@ -1,7 +1,7 @@
 .padding {
   padding: 3rem !important;
   /* margin: 0 auto; */
- 
+
   width: 100%;
   background-color: #ffffff;
   /* background-image: linear-gradient(to right top, #00f000, #b6c600, #f49000, #ff5029, #ff006d, #fa007a, #f30087, #eb0094, #e90070, #e1004d, #d3002c, #c00404); */
@@ -49,26 +49,24 @@
   margin-bottom: 20px;
 }
 
-
 .little-profile .pro-img img {
   width: 128px;
   height: 128px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 100%;
   border: 6px solid white;
-
 }
 
 html body .m-b-0 {
   margin-bottom: 0px;
 }
 
-h3 {
+/* h3 {
   line-height: 30px;
   font-size: 21px;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
-}
+} */
 
 .btn-rounded.btn-md {
   padding: 12px 35px;
@@ -128,7 +126,6 @@ html body .m-t-10 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-
 .savebuttonedit {
   background-color: #208d04;
   border: 1px solid #ffffff;
@@ -149,16 +146,54 @@ html body .m-t-10 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-
-.genderForm{
+.genderForm {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.genderstyle{
-  margin-left: -92px;
+/* Style for Name */
+h3 {
+  font-size: 24px;
+  font-weight:bolder;
+  color: #200c0c;
+  margin-bottom: 0;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-.genderstyledesignation{
-  margin-left: 29px;
+
+/* Style for Email */
+p {
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+/* Style for Gender */
+p.genderstyle {
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+
+/* Style for Designation */
+p.genderstyledesignation {
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+
+/* Style for the row container */
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Style for the column container */
+.col-lg-4 {
+  width: 33.33%;
+  padding: 0 15px;
 }

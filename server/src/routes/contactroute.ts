@@ -35,6 +35,6 @@ router.delete("/deleteuser/:id", deleteEmployees);
 router.put("/updateuser/:id", updateSingleEmployee);
 router.put("/imageupload/:Id", uploadImage);
 router.put("getdocument/:Id", upload.single("image"), uploadDocument);
-router.route("document/download").get(downloadFile);
+router.route("/documents/:id/download").get(downloadFile);
 
 export default router;

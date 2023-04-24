@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import Main from "../Main/Main";
 import qs from "qs";
-
+import Tab from "../Tab/Tab";
 
 interface Document {
   Id: number;
@@ -15,6 +15,16 @@ interface Document {
   designation: string;
 }
 
+interface User {
+  Name: string;
+  email: string;
+  gender: string;
+  designation: string;
+  Id: number;
+  url?: string;
+}
+
+
 const Documents: React.FC = () => {
   const [documents] = React.useState<Document[]>([]);
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
@@ -23,6 +33,8 @@ const Documents: React.FC = () => {
 
   const Name = new URLSearchParams(useLocation().search).get("name") || "";
   const id = new URLSearchParams(useLocation().search).get("id") || "";
+  
+
 
   React.useEffect(() => {
     axios
@@ -50,6 +62,47 @@ const Documents: React.FC = () => {
       setSelectedFile(null);
     }
   };
+  
+  // const handleUploadClick = async () => {
+  //   const email = "";
+  //   const gender = "";
+  //   const designation = "";
+
+  //   if (!selectedFile) {
+  //     console.error("No file selected");
+  //     return;
+  //   }
+
+  //   const newUser: Document = {
+  //     Id: Number(id),
+  //     Name,
+  //     email,
+  //     gender,
+  //     designation,
+  //   };
+
+  //   if (selectedFile) {
+  //     const formData = new FormData();
+  //     formData.append("image", selectedFile);
+  //     formData.append("user", JSON.stringify(newUser));
+
+  //     try {
+  //       const response = await axios.post(
+  //         `http://localhost:3005/get/getdocument/${Id}`,
+  //         formData,
+  //         {
+  //           headers: {
+  //             "Content-Type": "multipart/form-data",
+  //           },
+  //         }
+  //       );
+  //       console.log("response log in add user", response.data);
+  //       addedusers = response.data;
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // };
   const handleUploadClick = async () => {
     const email = "";
     const gender = "";
@@ -84,29 +137,35 @@ const Documents: React.FC = () => {
           }
         );
         console.log("response log in add user", response.data);
-        addedusers = response.data;
       } catch (error) {
         console.error(error);
       }
     }
   };
+
   const downloadFile = async (serverRelativePath?: string) => {
     try {
       if (!serverRelativePath) {
         throw new Error("serverRelativePath parameter is required");
       }
-      const response = await axios.get("http://localhost:3005/get/document/download", {
-        params: { serverRelativePath },
-        paramsSerializer: params => {
-          return qs.stringify(params, { encode: false });
-        },
-        responseType: "blob",
-      });
+      const response = await axios.get(
+      `  http://localhost:3005/get/documents/${Id}/download`,
+        {
+          params: { serverRelativePath },
+          paramsSerializer: (params) => {
+            return qs.stringify(params, { encode: false });
+          },
+          responseType: "blob",
+        }
+      );
       const blob = new Blob([response.data]);
-      
       const downloadLink = document.createElement("a");
+      
       downloadLink.href = window.URL.createObjectURL(blob);
-      downloadLink.setAttribute("download", serverRelativePath.split("/").pop() || "");
+      downloadLink.setAttribute(
+        "download",
+        serverRelativePath.split("/").pop() || ""
+      );
       document.body.appendChild(downloadLink);
       downloadLink.click();
     } catch (error) {
@@ -125,7 +184,11 @@ const Documents: React.FC = () => {
             type="file"
             className="choosefile"
             onChange={handleFileInputChange}
-            style={{ display: "inline-block" ,color: "red", fontWeight: "bold" }}
+            style={{
+              display: "inline-block",
+              color: "red",
+              fontWeight: "bold",
+            }}
           />
           <button type="button" onClick={handleUploadClick}>
             Upload
@@ -177,7 +240,11 @@ const Documents: React.FC = () => {
                     <td>{new Date().toLocaleDateString()}</td>
                     <td>Edwin PT</td>
                     <td>
-                      <button   onClick={() => downloadFile(file?.ServerRelativeUrl)}>Download</button>
+                      <button
+                        onClick={() => downloadFile(file?.ServerRelativeUrl)}
+                      >
+                        Download
+                      </button>
                     </td>
                   </tr>
                 </tbody>

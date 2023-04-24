@@ -22,7 +22,6 @@ interface IProfileProps {}
 
 const Profile: React.FC<IProfileProps> = () => {
   const { Id } = useParams<{ Id: string }>();
-  // console.log(Id, "id log");
 
   const profileId = Number(Id);
 

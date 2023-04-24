@@ -209,9 +209,80 @@ const uploadImage = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.uploadImage = uploadImage;
 //upload document to userfolder by id
+// export const uploadDocument = async (req: Request, res: Response) => {
+//   const userData = JSON.parse(req.body.user);
+//   console.log(userData);
+//   const fileBuffer = fs.readFileSync(req.file?.path);
+//   console.log(req.file, "image file");
+//   console.log(req.file?.path, "image file path");
+//   const image = req?.file as any;
+//   try {
+//     const newUser = {
+//       Id: userData.Id,
+//       Name: userData.Name,
+//       email: userData.email,
+//       gender: userData.gender,
+//       designation: userData.designation,
+//     };
+//     const response = await sp.web.lists.getByTitle("Contactslist").items.add({
+//       Name: newUser.Name,
+//       email: newUser.email,
+//       gender: newUser.gender,
+//       designation: newUser.designation,
+//     });
+//     console.log(response.data, "qwertyyyyyyyyyyyy");
+//     console.log(response.data.Id);
+//     let id = response.data.Id;
+//     const folderId = response.data.Id;
+//     const newFolderName = `${folderId}`;
+//     const documentLibraryName = `DocumentAnu`;
+//     const documentLibrary = sp.web.lists.getByTitle(documentLibraryName);
+//     await documentLibrary.rootFolder.folders
+//       .addUsingPath(newFolderName)
+//       .then(() => {
+//         console.log(`Folder '${newFolderName}' created successfully.`);
+//       });
+//     const LibraryName = `DocumentAnu/${id}`;
+//     const fileNamePath = `${image.filename}`;
+//     console.log(image);
+//     let result: any;
+//     if (image?.size <= 10485760) {
+//       // small upload
+//       console.log("Starting small file upload");
+//       result = await sp.web
+//         .getFolderByServerRelativePath(LibraryName)
+//         .files.addUsingPath(fileNamePath, fileBuffer, { Overwrite: true });
+//     } else {
+//       // large upload
+//       console.log("Starting large file upload");
+//     }
+//     console.log("Server relative URL:", result?.data?.ServerRelativeUrl);
+//     const imageurl = `https://2mxff3.sharepoint.com${result?.data?.ServerRelativeUrl}`;
+//     const list = sp.web.lists.getByTitle("Contactslist");
+//     try {
+//       await list.items.getById(id).update({
+//         filepath: imageurl,
+//       });
+//       console.log("File upload successful");
+//       res.status(200).json({
+//         success: true,
+//         message: "Profile picture uploaded successfully",
+//       });
+//     } catch (error) {
+//       console.error("Error while updating employee item:", error);
+//       res.status(500).json({
+//         success: false,
+//         message: "Error while updating employee item",
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({ error: "Internal server error" });
+//   }
+// };
 const uploadDocument = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _e, _f, _g, _h;
-    const userData = JSON.parse(req.body.user);
+    const userData = req.body.user;
     console.log(userData);
     const fileBuffer = fs.readFileSync((_e = req.file) === null || _e === void 0 ? void 0 : _e.path);
     console.log(req.file, "image file");
@@ -226,7 +297,7 @@ const uploadDocument = (req, res) => __awaiter(void 0, void 0, void 0, function*
             designation: userData.designation,
         };
         const response = yield sp_commonjs_1.sp.web.lists.getByTitle("Contactslist").items.add({
-            Name: newUser.Name,
+            Title: newUser.Name,
             email: newUser.email,
             gender: newUser.gender,
             designation: newUser.designation,
@@ -287,7 +358,6 @@ const uploadDocument = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.uploadDocument = uploadDocument;
 const downloadFile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const serverRelativePath = req.query.serverRelativePath;
-    console.log(serverRelativePath, "pathhhhhhhhhhhhhhhhhh");
     const file = sp_commonjs_1.sp.web.getFileByServerRelativePath(serverRelativePath);
     const buffer = yield file.getBuffer();
     const fileName = serverRelativePath.split("/").pop() || ""; // get the file name with extension
