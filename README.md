@@ -19,6 +19,7 @@ viewprofile
 
 profile edit delete
 ![Screenshot (56)](https://user-images.githubusercontent.com/108685775/233925885-41dc5128-2eea-4b9e-a360-759e8f634ffb.png)
+![Screenshot (59)](https://user-images.githubusercontent.com/108685775/233927920-8a6a738b-c5a4-4963-8f20-c2dec41060ea.png)
 
 documentpage
 ![Screenshot (57)](https://user-images.githubusercontent.com/108685775/233925962-bbd0e9f4-9bbc-40d9-aa44-adcbc793af32.png)
