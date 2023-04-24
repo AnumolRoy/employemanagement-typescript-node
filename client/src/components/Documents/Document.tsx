@@ -123,7 +123,7 @@ const Documents: React.FC = () => {
 
     if (selectedFile) {
       const formData = new FormData();
-      formData.append("image", selectedFile);
+      formData.append("files", selectedFile);
       formData.append("user", JSON.stringify(newUser));
 
       try {

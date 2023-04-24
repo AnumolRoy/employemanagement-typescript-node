@@ -63,6 +63,8 @@ const Profile: React.FC<IProfileProps> = () => {
       await axios.delete(url).then((response) => {});
     } catch (error) {}
     toggleModal();
+    toast.success('User deleted successfully  🎉🍞!');
+
     navigate("/");
   };
 

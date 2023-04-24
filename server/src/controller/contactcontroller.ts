@@ -344,7 +344,7 @@ export const uploadDocument = async (req: Request, res: Response) => {
       designation: newUser.designation,
     });
 
-    console.log(response.data, "qwertyyyyyyyyyyyy");
+    console.log(response.data);
     console.log(response.data.Id);
     let id = response.data.Id;
     const folderId = response.data.Id;

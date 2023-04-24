@@ -155,10 +155,51 @@
     align-items: center;
     justify-content: center;
   }
+ 
   
-  .genderstyle{
-    margin-left: -79px;
+/* Style for Name */
+h3 {
+    font-size: 24px;
+    font-weight:bolder;
+    color: #200c0c;
+    margin-bottom: 0;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
-  .genderstyledesignation{
-    margin-left: -46px;
+  
+  /* Style for Email */
+  p {
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 8px;
   }
+  
+  /* Style for Gender */
+  p.genderstyle {
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 8px;
+    text-transform: capitalize;
+  }
+  
+  /* Style for Designation */
+  p.genderstyledesignation {
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 8px;
+    text-transform: capitalize;
+  }
+  
+  /* Style for the row container */
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Style for the column container */
+  .col-lg-4 {
+    width: 33.33%;
+    padding: 0 15px;
+  }
+  

@@ -92,7 +92,7 @@ const Card: React.FC<CardProps> = ({ users }) => {
 
   const handleCardClick = (Id: string) => {
     console.log(`Card with id ${Number(Id)} clicked`);
-    navigate(`/profilebvc/${Number(Id)}`);
+    navigate(`/view/${Number(Id)}`);
   };
 
   return (

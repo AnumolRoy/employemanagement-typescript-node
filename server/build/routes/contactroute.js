@@ -23,6 +23,6 @@ router.post("/add-user", upload.single("image"), contactcontroller_1.AddEmployee
 router.delete("/deleteuser/:id", contactcontroller_1.deleteEmployees);
 router.put("/updateuser/:id", contactcontroller_1.updateSingleEmployee);
 router.put("/imageupload/:Id", contactcontroller_1.uploadImage);
-router.put("getdocument/:Id", upload.single("image"), contactcontroller_1.uploadDocument);
+router.put("getdocument/:Id", upload.single("files"), contactcontroller_1.uploadDocument);
 router.route("/documents/:id/download").get(contactcontroller_1.downloadFile);
 exports.default = router;
