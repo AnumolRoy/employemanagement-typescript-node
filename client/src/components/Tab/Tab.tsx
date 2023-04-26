@@ -33,7 +33,7 @@ const Tab: React.FC<ITabProps> = ({ Id, Name }) => {
           className={`back-button ${activeTab === "Profile" ? "active" : ""}`}
           onClick={handleProfileClick}
         >
-          Profile
+         Edit Profile
         </button>
       </Link>
       <Link to={`/document/${Id}?name=${encodeURIComponent(Name)}`}>

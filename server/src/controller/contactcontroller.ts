@@ -10,6 +10,13 @@ interface User {
   gender: string;
   designation: string;
   url?: string;
+  DOB:string;
+  country:string;
+  place:string;
+  address:string;
+  education:string;
+  language:string[];
+  ServerRelativeUrl: string;
 }
 
 //getall employees
@@ -67,7 +74,7 @@ const getDocumentsById = async (req: Request, res: Response) => {
       .get();
     console.log(documentLibrary);
 
-    console.log(documentLibrary, "-------------------");
+    console.log(documentLibrary);
     return res.json(documentLibrary);
   } catch (error) {
     console.error(error);
@@ -87,7 +94,7 @@ const AddEmployees = async (req: Request, res: Response) => {
   console.log(req.file?.path, "image file path");
 
   const image = req?.file as any;
-  console.log(image, "+++++++++++++++++++++++++");
+  console.log(image);
 
   try {
     const newUser = {
@@ -96,16 +103,31 @@ const AddEmployees = async (req: Request, res: Response) => {
       email: userData.email,
       gender: userData.gender,
       designation: userData.designation,
+      DOB:userData.DOB,
+      country:userData.country,
+      place:userData.place,
+      language:userData.language,
+      address:userData.address,
+      education:userData.education
     };
+
+    console.log(newUser,"user illn  controllerrrrrrrrrrrrrrrr");
+    
 
     const response = await sp.web.lists.getByTitle("Contactslist").items.add({
       Name: newUser.Name,
       email: newUser.email,
       gender: newUser.gender,
       designation: newUser.designation,
+      DOB:newUser.DOB,
+      country:newUser.country,
+      place:newUser.place,
+      language: { results: newUser.language },
+      address:newUser.address,
+      education:newUser.education
     });
 
-    console.log(response.data, "qwertyyyyyyyyyyyy");
+    console.log(response.data);
     console.log(response.data.Id);
     let id = response.data.Id;
     const folderId = response.data.Id;
@@ -131,7 +153,7 @@ const AddEmployees = async (req: Request, res: Response) => {
         .getFolderByServerRelativePath(LibraryName)
         .files.addUsingPath(fileNamePath, fileBuffer, { Overwrite: true });
 
-      console.log(result, "resulttttttttttttttttttttttttttttttttt");
+      console.log(result);
     } else {
       // large upload
       console.log("Starting large file upload");
@@ -189,6 +211,12 @@ const deleteEmployees = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
   }
+  // Delete folder from library
+  const folderName = `${id}`;
+  const documentLibraryName = `DocumentAnu`;
+  const documentLibrary = sp.web.lists.getByTitle(documentLibraryName);
+  const folder = await documentLibrary.rootFolder.folders.getByName(folderName);
+  await folder.delete();
 };
 
 export { deleteEmployees };
@@ -226,7 +254,6 @@ export const updateSingleEmployee = async (req: Request, res: Response) => {
 };
 
 export const uploadImage = async (req: Request, res: Response) => {
-  console.log("imagecheckinggggggggg");
   console.log(req.params);
   const { Id } = req.params;
   console.log(req.files);
@@ -234,7 +261,7 @@ export const uploadImage = async (req: Request, res: Response) => {
 
 //upload document to userfolder by id
 // export const uploadDocument = async (req: Request, res: Response) => {
-//   const userData = JSON.parse(req.body.user);
+//   const userData = req.body.user;
 //   console.log(userData);
 
 //   const fileBuffer = fs.readFileSync(req.file?.path);
@@ -242,7 +269,7 @@ export const uploadImage = async (req: Request, res: Response) => {
 
 //   console.log(req.file?.path, "image file path");
 
-//   const image = req?.file as any;
+//   const file = req?.file as any;
 
 //   try {
 //     const newUser = {
@@ -254,13 +281,13 @@ export const uploadImage = async (req: Request, res: Response) => {
 //     };
 
 //     const response = await sp.web.lists.getByTitle("Contactslist").items.add({
-//       Name: newUser.Name,
+//       Title: newUser.Name,
 //       email: newUser.email,
 //       gender: newUser.gender,
 //       designation: newUser.designation,
 //     });
 
-//     console.log(response.data, "qwertyyyyyyyyyyyy");
+//     console.log(response.data);
 //     console.log(response.data.Id);
 //     let id = response.data.Id;
 //     const folderId = response.data.Id;
@@ -274,12 +301,12 @@ export const uploadImage = async (req: Request, res: Response) => {
 //       });
 
 //     const LibraryName = `DocumentAnu/${id}`;
-//     const fileNamePath = `${image.filename}`;
+//     const fileNamePath = `${file.filename}`;
 
-//     console.log(image);
+//     console.log(file);
 
 //     let result: any;
-//     if (image?.size <= 10485760) {
+//     if (file?.size <= 10485760) {
 //       // small upload
 //       console.log("Starting small file upload");
 //       result = await sp.web
@@ -317,93 +344,59 @@ export const uploadImage = async (req: Request, res: Response) => {
 //     return res.status(500).json({ error: "Internal server error" });
 //   }
 // };
-export const uploadDocument = async (req: Request, res: Response) => {
-  const userData = req.body.user;
-  console.log(userData);
-
-  const fileBuffer = fs.readFileSync(req.file?.path);
-  console.log(req.file, "image file");
-
-  console.log(req.file?.path, "image file path");
-
-  const image = req?.file as any;
-
+const uploadDocument = async (req: Request, res: Response) => {
   try {
-    const newUser = {
-      Id: userData.Id,
-      Name: userData.Name,
-      email: userData.email,
-      gender: userData.gender,
-      designation: userData.designation,
-    };
+    const id: number = Number.parseInt(req.params.id);
+    const file = req.file;
 
-    const response = await sp.web.lists.getByTitle("Contactslist").items.add({
-      Title: newUser.Name,
-      email: newUser.email,
-      gender: newUser.gender,
-      designation: newUser.designation,
-    });
-
-    console.log(response.data);
-    console.log(response.data.Id);
-    let id = response.data.Id;
-    const folderId = response.data.Id;
-    const newFolderName = `${folderId}`;
-    const documentLibraryName = `DocumentAnu`;
-    const documentLibrary = sp.web.lists.getByTitle(documentLibraryName);
-    await documentLibrary.rootFolder.folders
-      .addUsingPath(newFolderName)
-      .then(() => {
-        console.log(`Folder '${newFolderName}' created successfully.`);
+    if (!file) {
+      console.error("No file selected");
+      return res.status(400).json({
+        success: false,
+        message: "No file selected",
       });
+    }
 
-    const LibraryName = `DocumentAnu/${id}`;
-    const fileNamePath = `${image.filename}`;
-
-    console.log(image);
+    const documentLibraryName = `DocumentAnu/${id}`;
+    const fileNamePath = `document.pdf`;
 
     let result: any;
-    if (image?.size <= 10485760) {
+    if (file.size <= 10485760) {
       // small upload
       console.log("Starting small file upload");
       result = await sp.web
-        .getFolderByServerRelativePath(LibraryName)
-        .files.addUsingPath(fileNamePath, fileBuffer, { Overwrite: true });
+        .getFolderByServerRelativePath(documentLibraryName)
+        .files.addUsingPath(fileNamePath, file.buffer, { Overwrite: true });
     } else {
       // large upload
       console.log("Starting large file upload");
+      result = await sp.web
+        .getFolderByServerRelativePath(documentLibraryName)
+        .files.addChunked(
+          fileNamePath,
+          new Blob([file.buffer]),
+          () => {
+            console.log(`Upload progress: `);
+          },
+          true
+        );
     }
 
-    console.log("Server relative URL:", result?.data?.ServerRelativeUrl);
-    const imageurl = `https://2mxff3.sharepoint.com${result?.data?.ServerRelativeUrl}`;
-
-    const list = sp.web.lists.getByTitle("Contactslist");
-
-    try {
-      await list.items.getById(id).update({
-        filepath: imageurl,
-      });
-
-      console.log("File upload successful");
-      res.status(200).json({
-        success: true,
-        message: "Profile picture uploaded successfully",
-      });
-    } catch (error) {
-      console.error("Error while updating employee item:", error);
-      res.status(500).json({
-        success: false,
-        message: "Error while updating employee item",
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(200).json({
+      success: true,
+      message: "File uploaded successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      success: false,
+      message: "Error uploading file",
+    });
   }
 };
+export{uploadDocument}
 
-
-export const downloadFile = async (req: Request, res: Response) => {
+const downloadFile = async (req: Request, res: Response) => {
   const serverRelativePath = req.query.serverRelativePath as string;
   const file = sp.web.getFileByServerRelativePath(serverRelativePath);
   const buffer: ArrayBuffer = await file.getBuffer();
@@ -411,7 +404,8 @@ export const downloadFile = async (req: Request, res: Response) => {
   const fileName = serverRelativePath.split("/").pop() || ""; // get the file name with extension
   const contentType = getContentType(fileName); // get the content type based on file extension
 
-  res.setHeader("Content-disposition", `attachment; filename=${fileName}`)
+  res.setHeader("Content-disposition", `attachment; filename=${fileName}`);
   res.setHeader("Content-type", contentType);
   res.status(200).send(Buffer.from(buffer));
 };
+export { downloadFile };

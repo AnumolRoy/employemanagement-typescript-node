@@ -6,6 +6,7 @@ import { useState } from "react";
 import Main from "../Main/Main";
 import qs from "qs";
 import Tab from "../Tab/Tab";
+import { toast } from "react-toastify";
 
 interface Document {
   Id: number;
@@ -13,6 +14,7 @@ interface Document {
   email: string;
   gender: string;
   designation: string;
+  ServerRelativeUrl: string;
 }
 
 interface User {
@@ -28,12 +30,15 @@ interface User {
 const Documents: React.FC = () => {
   const [documents] = React.useState<Document[]>([]);
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
+  const [files, setFiles] = React.useState<Document[]| null>(null);
   const { Id } = useParams<{ Id: string }>();
   const [userdetails, setUserdetails] = useState<Document[]>([]);
+  // const [user, setUser] = useState<User | undefined>(undefined);
+
 
   const Name = new URLSearchParams(useLocation().search).get("name") || "";
   const id = new URLSearchParams(useLocation().search).get("id") || "";
-  
+  const profileId = Number(Id);
 
 
   React.useEffect(() => {
@@ -83,7 +88,7 @@ const Documents: React.FC = () => {
 
   //   if (selectedFile) {
   //     const formData = new FormData();
-  //     formData.append("image", selectedFile);
+  //     formData.append("files", selectedFile);
   //     formData.append("user", JSON.stringify(newUser));
 
   //     try {
@@ -97,51 +102,63 @@ const Documents: React.FC = () => {
   //         }
   //       );
   //       console.log("response log in add user", response.data);
-  //       addedusers = response.data;
   //     } catch (error) {
   //       console.error(error);
   //     }
   //   }
   // };
   const handleUploadClick = async () => {
-    const email = "";
-    const gender = "";
-    const designation = "";
-
-    if (!selectedFile) {
-      console.error("No file selected");
-      return;
-    }
-
-    const newUser: Document = {
-      Id: Number(id),
-      Name,
-      email,
-      gender,
-      designation,
-    };
-
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append("files", selectedFile);
-      formData.append("user", JSON.stringify(newUser));
-
-      try {
-        const response = await axios.post(
-          `http://localhost:3005/get/getdocument/${Id}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        console.log("response log in add user", response.data);
-      } catch (error) {
-        console.error(error);
+    try {
+      if (!selectedFile) {
+        throw new Error("No file selected");
       }
+  
+      const formData = new FormData();
+      formData.append("document", selectedFile);
+  
+      const response = await axios.post(
+        `http://localhost:3005/get/documents/${Id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
+      console.log("Document uploaded successfully:", response.data);
+      toast.success("Document uploaded successfully", {
+        className: "toastify-success",
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error("Error uploading document:", error);
+      toast.error("Error uploading document", {
+        className: "toastify-error",
+      });
     }
   };
+  
+  //   if (!selectedFile) return;
+
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("file", selectedFile);
+
+  //     const response = await axios.put(
+  //       `http://localhost:3005/get/getdocument/${Id}`,
+  //       formData
+  //     );
+
+  //     console.log(response.data)
+  //     setFiles(null);
+  //     window.location.reload();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+ 
 
   const downloadFile = async (serverRelativePath?: string) => {
     try {
@@ -174,10 +191,12 @@ const Documents: React.FC = () => {
   };
 
   React.useEffect(() => {}, []);
+  
 
   return (
     <div>
       <Main />
+      {/* <Tab Id={profileId} Name={user.Name}/> */}
       <div className="docList">
         <div className="">
           <input

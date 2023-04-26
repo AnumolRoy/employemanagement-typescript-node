@@ -6,8 +6,9 @@ import "../../styles/profilePage.css";
 import Main from "../Main/Main";
 import Tab from "../Tab/Tab";
 import Spinner from "../spinner/Spinner";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 
 interface User {
   Name: string;
@@ -16,6 +17,11 @@ interface User {
   designation: string;
   Id: number;
   url?: string;
+  DOB:string;
+  place:string;
+  country:string;
+  education:string;
+  language:string[];
 }
 
 interface IProfileProps {}
@@ -34,6 +40,11 @@ const Profile: React.FC<IProfileProps> = () => {
     email: "",
     gender: "",
     designation: "",
+    DOB:"",
+    place:"",
+    country:"",
+    education:"",
+    language:[],
     Id: profileId,
   });
 
@@ -61,11 +72,37 @@ const Profile: React.FC<IProfileProps> = () => {
       const url = `http://localhost:3005/get/deleteuser/${profileId}`;
 
       await axios.delete(url).then((response) => {});
+      Swal.fire({
+        title: "Are you sure?",
+
+        text: "are you sure want to delete",
+
+        icon: "warning",
+
+        showCancelButton: true,
+
+        confirmButtonColor: "#3085d6",
+
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Back to Home!",
+      }).then((result: any) => {
+        if (result.isConfirmed) {
+          navigate("/");
+        }
+      });
     } catch (error) {}
     toggleModal();
-    toast.success('User deleted successfully  🎉🍞!');
+    // toast.success('User deleted successfully  🎉🍞!');
 
     navigate("/");
+  };
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+  const handleDeleteConfirmed = () => {
+    // Call the function to delete the user
+    handleDelete(profileId.toString());
+    setShowModal(false);
   };
 
   const handleEdit = () => {
@@ -81,6 +118,10 @@ const Profile: React.FC<IProfileProps> = () => {
       email: editedUser.email,
       gender: editedUser.gender,
       designation: editedUser.designation,
+      DOB:editedUser.DOB,
+      place:editedUser.place,
+      country:editedUser.country,
+      education:editedUser.education
     };
 
     try {
@@ -92,8 +133,7 @@ const Profile: React.FC<IProfileProps> = () => {
     } catch (error) {}
 
     setIsEditing(false);
-    toast.success('Details successfully edited and saved! 🎉🍞!');
-
+    toast.success("Details successfully edited and saved! 🎉🍞!");
   };
 
   const handleCancel = () => {
@@ -199,13 +239,84 @@ const Profile: React.FC<IProfileProps> = () => {
                       onChange={handleChange}
                     />
                   </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="DOB">DOB</label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      id="DOB"
+                      name="DOB"
+                      value={editedUser.DOB}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="place">place</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="place"
+                      name="place"
+                      value={editedUser.place}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="country">country</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="country"
+                      name="country"
+                      value={editedUser.country}
+                      onChange={handleChange}
+                    />
+                  </div>
                 </>
               ) : (
                 <>
                   <h3 className="m-b-0">{user.Name}</h3>
-                 <b> <p>Email : {user.email}</p></b>
-                 <b> <p className="genderstyle">Gender : {user.gender}</p></b>
-                 <b><p className="genderstyledesignation">Designation : {user.designation}</p></b> 
+                  <b>
+                    {" "}
+                    <p>Email : {user.email}</p>
+                  </b>
+                  <b>
+                    {" "}
+                    <p className="genderstyle">Gender : {user.gender}</p>
+                  </b>
+                  <b>
+                    <p className="genderstyledesignation">
+                      Designation : {user.designation}
+                    </p>
+                  </b>
+                  <b>
+                    <p className="genderstyledesignation">
+                      DOB : {user.DOB}
+                    </p>
+                  </b>
+                  <b>
+                    <p className="genderstyledesignation">
+                      Country : {user.country}
+                    </p>
+                  </b>
+                  <b>
+                    <p className="genderstyledesignation">
+                      Place: {user.place}
+                    </p>
+                  </b>
+                  <b>
+                    <p className="genderstyledesignation">
+                      language: {user.language}
+                    </p>
+                  </b>
+                  <b>
+                    <p className="genderstyledesignation">
+                      Education: {user.education}
+                    </p>
+                  </b>
                   <div className="row text-center m-t-20">
                     <div className="col-lg-4 col-md-4 m-t-20">
                       <button
@@ -225,8 +336,19 @@ const Profile: React.FC<IProfileProps> = () => {
                       {showModal && (
                         <div className="modal">
                           <div className="modal-content">
-                            <h2>User Deleted Successfully</h2>
-                            <button onClick={toggleModal}>Close</button>
+                            <p>Are you sure you want to delete the user?</p>
+                            <button
+                              className="modal-button"
+                              onClick={handleDeleteConfirmed}
+                            >
+                              Yes
+                            </button>
+                            <button
+                              className="modal-button"
+                              onClick={handleModalClose}
+                            >
+                              No
+                            </button>
                           </div>
                         </div>
                       )}

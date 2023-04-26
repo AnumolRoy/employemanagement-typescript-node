@@ -15,6 +15,15 @@ interface User {
   designation: string;
   Id: number;
   url?: string;
+  place:string;
+  country:string;
+  DOB:string;
+  address:string;
+  education:string;
+  language:string[]
+
+
+  
 }
 
 interface IProfileProps {}
@@ -33,6 +42,12 @@ const Profile: React.FC<IProfileProps> = () => {
     email: "",
     gender: "",
     designation: "",
+    DOB:"",
+    place:"",
+    country:"",
+    address:"",
+    education:"",
+    language:[],
     Id: profileId,
   });
 
@@ -87,6 +102,36 @@ const Profile: React.FC<IProfileProps> = () => {
                   <b>
                     <p className="genderstyledesignation">
                       Designation : {user.designation}
+                    </p>
+                  </b>
+                  <b>
+                    <p className="styledesignation">
+                      DOB : {user.DOB}
+                    </p>
+                  </b>
+                  <b>
+                    <p className="genderstyledesignation">
+                      Place: {user.place}
+                    </p>
+                  </b>
+                  <b>
+                    <p className="genderstyledesignation">
+                      Country : {user.country}
+                    </p>
+                  </b>
+                  <b>
+                    <p className="genderstyledesignation">
+                      address: {user.address}
+                    </p>
+                  </b>
+                  <b>
+                    <p className="genderstyledesignation">
+                      education: {user.education}
+                    </p>
+                  </b>
+                  <b>
+                    <p className="genderstyledesignation">
+                      language: {user.language}
                     </p>
                   </b>
                   <div className="row text-center m-t-20">

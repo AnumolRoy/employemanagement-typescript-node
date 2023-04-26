@@ -63,7 +63,7 @@ const getDocumentsById = (req, res) => __awaiter(void 0, void 0, void 0, functio
             .files.select("Name", "ServerRelativeUrl")
             .get();
         console.log(documentLibrary);
-        console.log(documentLibrary, "-------------------");
+        console.log(documentLibrary);
         return res.json(documentLibrary);
     }
     catch (error) {
@@ -80,7 +80,7 @@ const AddEmployees = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     console.log(req.file, "image file");
     console.log((_b = req.file) === null || _b === void 0 ? void 0 : _b.path, "image file path");
     const image = req === null || req === void 0 ? void 0 : req.file;
-    console.log(image, "+++++++++++++++++++++++++");
+    console.log(image);
     try {
         const newUser = {
             Id: userData.Id,
@@ -88,14 +88,27 @@ const AddEmployees = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             email: userData.email,
             gender: userData.gender,
             designation: userData.designation,
+            DOB: userData.DOB,
+            country: userData.country,
+            place: userData.place,
+            language: userData.language,
+            address: userData.address,
+            education: userData.education
         };
+        console.log(newUser, "user illn  controllerrrrrrrrrrrrrrrr");
         const response = yield sp_commonjs_1.sp.web.lists.getByTitle("Contactslist").items.add({
             Name: newUser.Name,
             email: newUser.email,
             gender: newUser.gender,
             designation: newUser.designation,
+            DOB: newUser.DOB,
+            country: newUser.country,
+            place: newUser.place,
+            language: { results: newUser.language },
+            address: newUser.address,
+            education: newUser.education
         });
-        console.log(response.data, "qwertyyyyyyyyyyyy");
+        console.log(response.data);
         console.log(response.data.Id);
         let id = response.data.Id;
         const folderId = response.data.Id;
@@ -117,7 +130,7 @@ const AddEmployees = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             result = yield sp_commonjs_1.sp.web
                 .getFolderByServerRelativePath(LibraryName)
                 .files.addUsingPath(fileNamePath, fileBuffer, { Overwrite: true });
-            console.log(result, "resulttttttttttttttttttttttttttttttttt");
+            console.log(result);
         }
         else {
             // large upload
@@ -168,6 +181,12 @@ const deleteEmployees = (req, res) => __awaiter(void 0, void 0, void 0, function
     catch (error) {
         console.log(error);
     }
+    // Delete folder from library
+    const folderName = `${id}`;
+    const documentLibraryName = `DocumentAnu`;
+    const documentLibrary = sp_commonjs_1.sp.web.lists.getByTitle(documentLibraryName);
+    const folder = yield documentLibrary.rootFolder.folders.getByName(folderName);
+    yield folder.delete();
 });
 exports.deleteEmployees = deleteEmployees;
 //update single user by id
@@ -202,7 +221,6 @@ const updateSingleEmployee = (req, res) => __awaiter(void 0, void 0, void 0, fun
 });
 exports.updateSingleEmployee = updateSingleEmployee;
 const uploadImage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("imagecheckinggggggggg");
     console.log(req.params);
     const { Id } = req.params;
     console.log(req.files);
@@ -210,12 +228,12 @@ const uploadImage = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.uploadImage = uploadImage;
 //upload document to userfolder by id
 // export const uploadDocument = async (req: Request, res: Response) => {
-//   const userData = JSON.parse(req.body.user);
+//   const userData = req.body.user;
 //   console.log(userData);
 //   const fileBuffer = fs.readFileSync(req.file?.path);
 //   console.log(req.file, "image file");
 //   console.log(req.file?.path, "image file path");
-//   const image = req?.file as any;
+//   const file = req?.file as any;
 //   try {
 //     const newUser = {
 //       Id: userData.Id,
@@ -225,12 +243,12 @@ exports.uploadImage = uploadImage;
 //       designation: userData.designation,
 //     };
 //     const response = await sp.web.lists.getByTitle("Contactslist").items.add({
-//       Name: newUser.Name,
+//       Title: newUser.Name,
 //       email: newUser.email,
 //       gender: newUser.gender,
 //       designation: newUser.designation,
 //     });
-//     console.log(response.data, "qwertyyyyyyyyyyyy");
+//     console.log(response.data);
 //     console.log(response.data.Id);
 //     let id = response.data.Id;
 //     const folderId = response.data.Id;
@@ -243,10 +261,10 @@ exports.uploadImage = uploadImage;
 //         console.log(`Folder '${newFolderName}' created successfully.`);
 //       });
 //     const LibraryName = `DocumentAnu/${id}`;
-//     const fileNamePath = `${image.filename}`;
-//     console.log(image);
+//     const fileNamePath = `${file.filename}`;
+//     console.log(file);
 //     let result: any;
-//     if (image?.size <= 10485760) {
+//     if (file?.size <= 10485760) {
 //       // small upload
 //       console.log("Starting small file upload");
 //       result = await sp.web
@@ -281,78 +299,46 @@ exports.uploadImage = uploadImage;
 //   }
 // };
 const uploadDocument = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _e, _f, _g, _h;
-    const userData = req.body.user;
-    console.log(userData);
-    const fileBuffer = fs.readFileSync((_e = req.file) === null || _e === void 0 ? void 0 : _e.path);
-    console.log(req.file, "image file");
-    console.log((_f = req.file) === null || _f === void 0 ? void 0 : _f.path, "image file path");
-    const image = req === null || req === void 0 ? void 0 : req.file;
     try {
-        const newUser = {
-            Id: userData.Id,
-            Name: userData.Name,
-            email: userData.email,
-            gender: userData.gender,
-            designation: userData.designation,
-        };
-        const response = yield sp_commonjs_1.sp.web.lists.getByTitle("Contactslist").items.add({
-            Title: newUser.Name,
-            email: newUser.email,
-            gender: newUser.gender,
-            designation: newUser.designation,
-        });
-        console.log(response.data, "qwertyyyyyyyyyyyy");
-        console.log(response.data.Id);
-        let id = response.data.Id;
-        const folderId = response.data.Id;
-        const newFolderName = `${folderId}`;
-        const documentLibraryName = `DocumentAnu`;
-        const documentLibrary = sp_commonjs_1.sp.web.lists.getByTitle(documentLibraryName);
-        yield documentLibrary.rootFolder.folders
-            .addUsingPath(newFolderName)
-            .then(() => {
-            console.log(`Folder '${newFolderName}' created successfully.`);
-        });
-        const LibraryName = `DocumentAnu/${id}`;
-        const fileNamePath = `${image.filename}`;
-        console.log(image);
+        const id = Number.parseInt(req.params.id);
+        const file = req.file;
+        if (!file) {
+            console.error("No file selected");
+            return res.status(400).json({
+                success: false,
+                message: "No file selected",
+            });
+        }
+        const documentLibraryName = `DocumentAnu/${id}`;
+        const fileNamePath = `document.pdf`;
         let result;
-        if ((image === null || image === void 0 ? void 0 : image.size) <= 10485760) {
+        if (file.size <= 10485760) {
             // small upload
             console.log("Starting small file upload");
             result = yield sp_commonjs_1.sp.web
-                .getFolderByServerRelativePath(LibraryName)
-                .files.addUsingPath(fileNamePath, fileBuffer, { Overwrite: true });
+                .getFolderByServerRelativePath(documentLibraryName)
+                .files.addUsingPath(fileNamePath, file.buffer, { Overwrite: true });
         }
         else {
             // large upload
             console.log("Starting large file upload");
+            result = yield sp_commonjs_1.sp.web
+                .getFolderByServerRelativePath(documentLibraryName)
+                .files.addChunked(fileNamePath, new Blob([file.buffer]), () => {
+                console.log(`Upload progress: `);
+            }, true);
         }
-        console.log("Server relative URL:", (_g = result === null || result === void 0 ? void 0 : result.data) === null || _g === void 0 ? void 0 : _g.ServerRelativeUrl);
-        const imageurl = `https://2mxff3.sharepoint.com${(_h = result === null || result === void 0 ? void 0 : result.data) === null || _h === void 0 ? void 0 : _h.ServerRelativeUrl}`;
-        const list = sp_commonjs_1.sp.web.lists.getByTitle("Contactslist");
-        try {
-            yield list.items.getById(id).update({
-                filepath: imageurl,
-            });
-            console.log("File upload successful");
-            res.status(200).json({
-                success: true,
-                message: "Profile picture uploaded successfully",
-            });
-        }
-        catch (error) {
-            console.error("Error while updating employee item:", error);
-            res.status(500).json({
-                success: false,
-                message: "Error while updating employee item",
-            });
-        }
+        return res.status(200).json({
+            success: true,
+            message: "File uploaded successfully",
+        });
     }
-    catch (error) {
-        console.log(error);
-        return res.status(500).json({ error: "Internal server error" });
+    catch (err) {
+        console.error(err);
+        return res.status(500).json({
+            success: false,
+            message: "Error uploading file",
+        });
     }
 });
 exports.uploadDocument = uploadDocument;

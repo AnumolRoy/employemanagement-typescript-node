@@ -28,6 +28,11 @@
 .input_field {
   background-color: white;
 }
+.input_fieldaddress{
+height: 40px;
+background-color: white;
+
+}
 
 .registration_form {
   background-color: rgba(255, 255, 255, 0.15);
@@ -145,3 +150,56 @@ input[type="email"]:focus {
   color: #fff;
   margin-left: 11px;
 }
+.input_wrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.input_field {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.input_field:focus,
+.input_field:hover {
+  border-color: #007bff;
+}
+
+.input_checkbox {
+  margin-right: 10px;
+}
+
+.checkbox_wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+select:focus,
+select:hover {
+  border-color: #007bff;
+}
+

@@ -1,30 +1,41 @@
 import { useState, CSSProperties } from "react";
+
+import { HashLoader } from "react-spinners";
+
 import ClipLoader from "react-spinners/ClipLoader";
-import RingLoader from "react-spinners/RingLoader";
-import "../../styles/spinner.css";
+import Main from "../Main/Main";
 
 const override: CSSProperties = {
   display: "block",
-  margin: "180px auto 0",
-  borderColor: "blue",
+
+  margin: "auto",
+
+  borderColor: "	#0000ff",
 };
 
-function App() {
+const Spinner = () => {
   let [loading, setLoading] = useState(true);
-  let [color, setColor] = useState("#0000ff");
+
+  let [color, setColor] = useState("");
 
   return (
-    <div className="sweet-loading">
-      <RingLoader
-        color={color}
-        loading={loading}
-        cssOverride={override}
-        size={100}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+    <div>
+      <Main />
+      <div
+        style={{
+          display: "flex",
+
+          alignItems: "center",
+
+          justifyContent: "center",
+
+          height: "100vh",
+        }}
+      >
+        <HashLoader color="	#0000ff" />
+      </div>
     </div>
   );
-}
+};
 
-export default App;
+export default Spinner;

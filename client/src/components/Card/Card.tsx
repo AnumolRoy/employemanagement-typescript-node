@@ -18,13 +18,19 @@ interface User {
   designation: string;
   Id: number;
   url?: string;
+  DOB:string;
+  filepath?:string,
+  country:string,
+  place:string,
+  address:string
+  // language:string[]
 }
 
 interface CardProps {
   users: User[];
 }
 
-const Card: React.FC<CardProps> = ({ users }) => {
+const Card: React.FC<CardProps> = () => {
   const [userList, setUserList] = useState<User[]>([]);
   const [test, setTest] = useState<boolean>(true);
   const [showCard, setShowCard] = useState<boolean>(true);
@@ -41,25 +47,30 @@ const Card: React.FC<CardProps> = ({ users }) => {
       .then((response) => {
         console.log("success response");
 
-        console.log("Data:", response.data);
+        console.log("Data------------:", response.data);
         setUserList(response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [users, oldUsers]);
+  }, [oldUsers,test ]);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    (async () => {})();
-  }, [users]);
+  // useEffect(() => {
+  //   (async () => {})();
+  // }, [users]);
 
   // Function to handle adding a new user to the user list
   const handleAddUser = async (newUser: User) => {
-    const updatedList = [...userList, newUser];
+    // const updatedList = [...userList, newUser];
     setTest(!test);
-    setUserList(updatedList);
+    // console.log(updatedList,"+++++++++++++++++++++++++++++++++++++");
+    
+    // setUserList(updatedList);
+
+    console.log(newUser,"||||||||||||||||||||||||||||||||||||");
+    
 
     // Setting showCard back to true to show the user list again
     setShowCard(true);
@@ -143,6 +154,7 @@ const Card: React.FC<CardProps> = ({ users }) => {
                         <h5>Email : {item.email}</h5>
                         <h5>Gender : {item.gender}</h5>
                         <h5>Designation : {item.designation}</h5>
+                       
                       </div>
                       <div className="icons">
                         <GrInstagram />
